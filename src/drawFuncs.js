@@ -94,6 +94,12 @@ const fillImageData = (imageData, color) => {
   return imageData
 }
 
+/* Repeatable set of random numbers. */
+const randomNumbers = []
+for (let i = 0; i < 15373; i++) { // prime number
+  randomNumbers.push(Math.random())
+}
+
 /**
  * Draw a noisy gradient on the ImageData provided. "Noisy" means the pixels are either colored, or
  * untouched, with no color blending attempted.
@@ -121,7 +127,7 @@ const drawNoisyGradient = (imageData, color, transitionLength, transitionStartPo
                gradientDirPosNormalized < transitionStartPoint + transitionLength) {
       // Within transition: conditionally color
       const transitionPos = Math.abs(gradientDirPosNormalized - transitionStartPoint) / transitionLength
-      if (Math.random() >= transitionPos) {
+      if (randomNumbers[i % randomNumbers.length] >= transitionPos) {
         colorPixel(data, i, color)
       }
     } else {
